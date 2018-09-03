@@ -2,17 +2,18 @@ var https = require('https');
 
 //library code (person 1)
 function getHTML (options, callback) {
-  https.get(requestOptions, function (response) {
+  https.get(options, function (response) {
     var buffer = '';
 
     response.setEncoding('utf8');
 
     response.on('data', function (data) {
       buffer += data;
+      callback(buffer);
     })
 
     response.on('end', function (data) {
-      callback(buffer);
+      console.log("end");
     })
   })
 };
@@ -26,7 +27,7 @@ function printHTML (html) {
 
 var requestOptions = {
   host: 'syntantris.github.io',
-  path: '/http-examples/step3.html'
+  path: '/http-examples/step4.html'
 };
 
 getHTML(requestOptions, printHTML);
